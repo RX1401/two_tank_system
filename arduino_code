@@ -1,0 +1,59 @@
+int trigger = 10;
+int echo = 11;
+int led1 = 12;
+int led2 = 13;
+
+int totaltime;
+int totaldistance;
+
+int tank_level = 10;
+int water_level;
+
+int water_signal = 5;
+
+void setup() {
+  pinMode(trigger,OUTPUT);
+  pinMode(echo,INPUT);
+  pinMode(12,OUTPUT);
+  pinMode(13,OUTPUT);
+  pinMode(water_signal,OUTPUT);
+ 
+
+  
+  Serial.begin(9600);
+
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  digitalWrite(trigger,LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger,LOW);
+
+  totaltime = pulseIn(echo,HIGH);
+  totaldistance = (totaltime*0.0034)/2;
+
+ Serial.print("distance");
+ Serial.println(totaldistance);
+
+  if(water_level == 0)
+  {
+    digitalWrite(led1,HIGH);
+    digitalWrite(led2,LOW);
+    digitalWrite(water_signal,LOW);
+  }
+  else if(water_level >= 10)
+  {
+    digitalWrite(led1,LOW);
+    digitalWrite(led2,HIGH);
+    digitalWrite(water_signal,HIGH);
+  }
+
+
+
+  // put your main code here, to run repeatedly:
+
+}
